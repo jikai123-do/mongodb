@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
@@ -24,10 +23,17 @@
     <param-value>classpath:spring.xml</param-value>
   </context-param>
 
-  <!--Spring log4j Config Ioader-->
-  <listener>
-   <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-  </listener>
+  <!--Spring log4j Config loader-->
+    <!--java.lang.ClassNotFoundException: org.springframework.web.util.Log4jConfigListener
+      发现从Spring 4.2.1开始，已删除Log4jConfigListener，支持Apache Log4j 2，官方说明
+     所以我们需要引入log4j的jar，注意是apache.logging 下的，版本自定义，在pom.xml加入依赖-->
+  <!--<listener>-->
+   <!--<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>-->
+  <!--</listener>-->
+
+    <listener>
+        <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+    </listener>
 
     <context-param>
     <param-name>log4jConfigLocation</param-name>
@@ -74,10 +80,10 @@
 
   <servlet-mapping>
     <servlet-name>default</servlet-name>
-    <url-pattern>*.htnl</url-pattern>
+    <url-pattern>*.html</url-pattern>
   </servlet-mapping>
 <error-page>
-  <!--当系统出现404错误，跳转到页面nopage.htn1-->
+  <!--当系统出现404错误，跳转到页面nopage.htm1-->
   <error-code>404</error-code>
   <location>/noPage.jsp</location>
   </error-page>

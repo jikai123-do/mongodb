@@ -18,7 +18,7 @@
 
 
 
-    <mvc:annotation-driven conversion-service="conversionService">
+    <mvc:annotation-driven >
         <mvc:message-converters register-defaults="true">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
              <constructor-arg  value="UTF-8" />

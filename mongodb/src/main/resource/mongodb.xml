@@ -17,10 +17,10 @@
     <!--.加载mongodb的配置属性文件.-->
     <context:property-placeholder location="classpath:mongo.properties"/>
 
-    <mongo:mongo-client host="Smongo.host" port="${mongoport}" id="mongo">
+    <mongo:mongo-client host="${mongo.host}" port="${mongo.port}" id="mongo">
         <mongo:client-options
-            write-concern="${mongo.writeconcer}"
-            connect-timeout="${mongo.connectionTimeout}"
+            write-concern="${mongo.writeconcern}"
+            connect-timeout="${mongo.connectTimeout}"
             socket-keep-alive="${mongo.socketKeepAlive}"/>
         </mongo:mongo-client>
 
