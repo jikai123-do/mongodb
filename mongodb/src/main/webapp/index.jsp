@@ -62,8 +62,8 @@
             $("#delete").click( function () {
 
                 var data={
-                    name:$("#name_d").val(),
-                    age:$("#age_d").val()
+                    name_d:$("#name_d").val(),
+                    age_d:$("#age_d").val()
                 };
 
                 $.ajax({
@@ -119,7 +119,23 @@
                     contentType:'application/json;charset:utf-8',
                     data:JSON.stringify(data),
                     success:function (data) {
-                        alert(data);
+                       $("#rbody tr").remove();//清除数据区
+                        var body= $("#rbody");
+                        for(var i=0;i<data.length;i++){
+                            var tr=$("<tr ></tr>");
+                            tr.appendTo(body);
+                          var name=data[i].name.toString();
+                          var age=data[i].age.toString();
+                          $("<td>"+name+"</td>").appendTo(tr);
+                          $("<td>"+age+"</td>").appendTo(tr);
+
+                        }
+
+
+
+
+
+
                     }
 
                 })
@@ -179,13 +195,16 @@
                 姓名：<input id="name_q" type="text" placeholder="name" style="margin-right: 20px" />
                 年龄：<input id="age_q" type="text" placeholder="age" />
                 <button id="query" class="btn btn-deflaut" style="margin-left: 50px" > 查询</button>
-                <table id="rtable" style="width:80%">
+                <table id="rtable" style="width:80% ;border: 5px; solid:black">
                     <thead >
                     <tr>
-                        <th class="col-xs-2" data-field="name" style="margin-right: 5px">姓名</th>
-                        <th class="col-xs-2" data-field="age"  style="margin-left: 30px">年龄</th>
+                        <td class="col-xs-2"  style="margin-right: 5px">姓名</th>
+                        <td class="col-xs-2"   style="margin-left: 30px">年龄</td>
                     </tr>
                     </thead>
+                    <tbody id="rbody">
+                    <tr></tr>
+                    </tbody>
                 </table>
             </div>
         </div>
